@@ -1,0 +1,19 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #333333;
+}
+
+nav ul li a {
+    display: block;
+    padding: 1em 3em;
+    text-decoration: none;
+    color: white;
+}
+
+nav ul li a:hover {
+    background-color: #111111;
+}
