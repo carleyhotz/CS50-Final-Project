@@ -1,27 +1,9 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html lang="en">
-    <head>
-        <link href="../static/styles.css" rel="stylesheet">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Games</title>
-    </head>
-    <body>
-        <header>
-            <h1>2048</h1>
-            <nav>
-                <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="2048.html">2048</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <p>tesssssssssting</p>
-        </main>
-        <footer>
-            Created by C. Hotz 2026
-        </footer>
-    </body>
-</html>
+{% block title %}Home{% endblock %}
+
+{% block main %}
+    <h2>Home</h2>
+    <p>tesssssssssting</p>
+    <p>Hello, this site will have some web games for users to play. The first game to be released will be 2048.</p>
+{% endblock %}

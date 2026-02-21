@@ -1,3 +1,16 @@
+:root {
+    /* 2048 tile colors */
+    --orange: #FC9A49;
+    --yellow: #FFE873;
+    --ltgreen: #61FAAD;
+    --dkgreen: #4CC84C;
+    --ltblue: #1AC1F0;
+    --dkblue: #0982D9;
+    --purple: #CD36FF;
+
+    /* to use colors, var(--color name)*/
+}
+
 nav ul {
     list-style-type: none;
     margin: 0;
