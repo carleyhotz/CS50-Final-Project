@@ -36,10 +36,11 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     align-content: center;
-    padding: 2em;
+    
     width: 75vw;
     height: 75vh;
     margin: 0 auto;
+    margin-bottom: 4.5em;
 }
 
 .container {
@@ -63,3 +64,7 @@ nav ul li a:hover {
     align-items: center;
 }
 /* 2048 end */
+
+.main {
+    margin-bottom: 5%;
+}
