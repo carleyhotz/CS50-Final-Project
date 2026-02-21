@@ -30,3 +30,30 @@ nav ul li a {
 nav ul li a:hover {
     background-color: #111111;
 }
+
+/* 2048 Grid start */
+.square {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 2em;
+}
+
+.container {
+    display: inline-grid;
+    grid-template: repeat(4, 1fr)/repeat(4, 1fr);
+    background-color: dodgerblue;
+    padding: 10px;
+    justify-items: center;
+    gap: 10px;
+}
+
+.container div {
+    background-color: #f1f1f1;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    aspect-ratio: 1/1;
+}
+/* 2048 end */
