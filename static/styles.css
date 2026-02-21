@@ -37,6 +37,9 @@ nav ul li a:hover {
     justify-content: center;
     align-content: center;
     padding: 2em;
+    width: 75vw;
+    height: 75vh;
+    margin: 0 auto;
 }
 
 .container {
@@ -46,14 +49,17 @@ nav ul li a:hover {
     padding: 10px;
     justify-items: center;
     gap: 10px;
+    min-height: 350px;
 }
 
 .container div {
     background-color: #f1f1f1;
     border: 1px solid black;
     padding: 10px;
-    font-size: 30px;
-    text-align: center;
+    font-size: 50px;
     aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* 2048 end */
