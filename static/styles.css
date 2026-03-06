@@ -31,40 +31,6 @@ nav ul li a:hover {
     background-color: #111111;
 }
 
-/* 2048 Grid start */
-.square {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    
-    width: 75vw;
-    height: 75vh;
-    margin: 0 auto;
-    margin-bottom: 4.5em;
-}
-
-.container {
-    display: inline-grid;
-    grid-template: repeat(4, 1fr)/repeat(4, 1fr);
-    background-color: dodgerblue;
-    padding: 10px;
-    justify-items: center;
-    gap: 10px;
-    min-height: 350px;
-}
-
-.container div {
-    background-color: #f1f1f1;
-    border: 1px solid black;
-    padding: 10px;
-    font-size: 50px;
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-/* 2048 end */
-
 .main {
     margin-bottom: 5%;
 }
