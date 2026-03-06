@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //generate first 2 tiles
         generate();
         generate();
+        addColors();
     }
     createBoard();
 
@@ -62,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // generates a new tile (2 or 4, 2 has a 70% probability) at that index
         tiles[randomTile].innerHTML = weightedRandom(2, 4, 0.7);
+
+        addColors(); // add colors after generating new tile
     }
 
     /* -- helper functions for board manipulation -- */
@@ -75,12 +78,63 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < board.length; i++) {
             tiles[i].innerHTML = board[i]; // takes an array of integers and updates the tile values on the board
         }
+        addColors(); // add colors after updating tile values
     }
 
     // compare two arrays (used to check if board changed after a move)
     function arraysEqual(a, b) {
         // compares size of arrays & checks values and their order
         return a.length === b.length && a.every((value, index) => value === b[index]);
+    }
+
+    /* -- helper functions for tile colors -- */
+    // add colors to tiles based on their values
+    function addColors() {
+        // map tile values to CSS variable names
+        const colorMap = {
+            0: '--grid',
+            2: '--orange',
+            4: '--yellow',
+            8: '--ltgreen',
+            16: '--dkgreen',
+            32: '--ltblue',
+            64: '--dkblue',
+            128: '--indigo',
+            256: '--purple',
+            512: '--indigo',
+            1024: '--purple',
+            2048: '--dkblue',
+            // add more as needed, e.g., 256: '--another-color'
+        };
+
+        // loop through tiles and set background color based on value
+        tiles.forEach(tile => {
+            const value = parseInt(tile.innerHTML);
+            // get the computed styles of the root element to access CSS variables
+            const rootStyles = getComputedStyle(document.documentElement);
+            // looks up CSS variable name based on tile value
+            let colorVar = colorMap[value];
+            
+            // if no mapping exists and value is >= 2048, use dkblue
+            if (!colorVar && value >= 2048) {
+                colorVar = '--dkblue';
+            }
+
+            // adjust font size based on tile value
+            if (value >= 1024) {
+                tile.style.fontSize = '35px';  // smaller for 4+ digits
+            } else if (value >= 128) {
+                tile.style.fontSize = '45px';  // medium for 3 digits
+            } else {
+                tile.style.fontSize = '60px';  // default for smaller numbers
+            }
+
+            if (colorVar) {
+                tile.style.backgroundColor = rootStyles.getPropertyValue(colorVar).trim();
+            } else {
+                tile.style.backgroundColor = '#DADBDC'; // default for empty or unmapped tiles
+            }
+        });
     }
 
 
