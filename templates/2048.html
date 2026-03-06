@@ -1,33 +1,33 @@
 {% extends "layout.html" %}
 
-{% block link %}<link href="../static/2048.css" rel="stylesheet">{% endblock %}
+{% block link %}
+<link href="../static/2048.css" rel="stylesheet">
+<script src="../static/2048.js"></script>
+{% endblock %}
 
 {% block title %}2048{% endblock %}
 
 {% block main %}
-    <h2>2048</h2>
-    <p>testing testing</p>
-    <p>1234</p>
-
     
     <div class="container">
         <div class="info">
             <h2>2048</h2>
             <div class="score-container">
-                <h3 class="score-title">Score <span id="score">0</span></span></h3>
-                <h3 class="best-title">Best <span id="best">0</span></h3>
+                <p class="score-title">Score</p>
+                <h3 id="score">0</h3>
             </div>
-            <button>New Game</button>
+            <div class="best-container">
+                <p class="best-title">Best</p>
+                <h3 id="best">100000</h3>
+            </div>
         </div>
-        <p>Use arrow keys to move the tiles. When two tiles with the same number touch, they combine. Try to get a tile with 2048!</p>
+        <div class="info2">
+            <p id="result">Use arrow keys to move the tiles. When two tiles with the same number touch, they combine. Try to get a tile with <b>2048!</b></p>
+            <button id="new-game">New Game</button>
+        </div>
+        
         <div class="grid"></div>
     </div>
     
-
-    <p>filler text bgiwvfoeqpl brnoeifvpkwl rbnevioc,l rbnvoiefkp</p>
-    <p>filler text bgiwvfoeqpl brnoeifvpkwl rbnevioc,l rbnvoiefkp</p>
-    <p>filler text bgiwvfoeqpl brnoeifvpkwl rbnevioc,l rbnvoiefkp</p>
-    <p>filler text bgiwvfoeqpl brnoeifvpkwl rbnevioc,l rbnvoiefkp</p>
-    <p>filler text bgiwvfoeqpl brnoeifvpkwl rbnevioc,l rbnvoiefkp</p>
 
 {% endblock %}

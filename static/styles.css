@@ -1,17 +1,4 @@
-:root {
-    /* 2048 tile colors */
-    --orange: #FC9A49;
-    --yellow: #FFE873;
-    --ltgreen: #61FAAD;
-    --dkgreen: #4CC84C;
-    --ltblue: #1AC1F0;
-    --dkblue: #0982D9;
-    --purple: #CD36FF;
-
-    /* to use colors, var(--color name)*/
-}
-
-nav ul {
+header nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -20,17 +7,18 @@ nav ul {
     background-color: #333333;
 }
 
-nav ul li a {
+header nav ul li a {
     display: block;
     padding: 1em 3em;
     text-decoration: none;
     color: white;
 }
 
-nav ul li a:hover {
+header nav ul li a:hover {
     background-color: #111111;
 }
 
 .main {
-    margin-bottom: 5%;
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
