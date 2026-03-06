@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0
     let gamePause = false
     let gameWon = false
+    let gameOver = false
 
     // create tiles
     function createBoard() {
@@ -21,7 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
         generate()
     }
     createBoard()
-    checkWin()
+
+    // event listener for if new game button clicked
+    document.getElementById('new-game').onclick = function() {
+        newGame()
+    }
+
+    window.onload = function() {
+        newGame()
+    }
 
     // get a weighted random number between two options
     function weightedRandom(option1, option2, weight1) {
@@ -240,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         combineRow()
         moveLeft()
         generate()
+        checkGameOver()
     }
 
     function keyRight() {
@@ -247,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         combineRow()
         moveRight()
         generate()
+        checkGameOver()
     }
 
     function keyUp() {
@@ -254,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         combineColumn()
         moveUp()
         generate()
+        checkGameOver()
     }
 
     function keyDown() {
@@ -261,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         combineColumn()
         moveDown()
         generate()
+        checkGameOver()
     }
 
     // check for 2048
@@ -284,5 +297,219 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("continue-game").onclick = function() {
         gamePause = false
     }
+
+    // copy current game board
+    function currentBoard() {
+        let cBoard = []
+        for (i = 0; i < width * width; i++) {
+            cBoard.push(tiles[i].innerHTML)
+        }
+
+        // return board array
+        return cBoard
+    }
+
+    // check for game over
+    function checkGameOver() {
+        // copy current board
+        let boardOriginal = currentBoard().slice()
+        let dif = false
+
+    /*    // try to move in each direction
+        keyLeft()
+        let boardLeft = currentBoard().slice()
+        console.log(currentBoard().slice())
+        keyRight()
+        let boardRight = currentBoard().slice()
+        console.log(currentBoard().slice())
+        keyUp()
+        let boardUp = currentBoard().slice()
+        console.log(currentBoard().slice())
+        keyDown()
+        let boardDown = currentBoard().slice()
+        console.log(currentBoard().slice())    */
+
+        // Test each direction on a copy without calling actual key functions
+        // Test Left
+        let testBoard = boardOriginal.slice()
+        simulateMoveLeft(testBoard)
+        simulateCombineRow(testBoard)
+        simulateMoveLeft(testBoard)
+        if (!arraysEqual(boardOriginal, testBoard)) {
+            dif = true
+        }
+
+        // Test Right
+        testBoard = boardOriginal.slice()
+        simulateMoveRight(testBoard)
+        simulateCombineRow(testBoard)
+        simulateMoveRight(testBoard)
+        if (!arraysEqual(boardOriginal, testBoard)) {
+            dif = true
+        }
+
+        // Test Up
+        testBoard = boardOriginal.slice()
+        simulateMoveUp(testBoard)
+        simulateCombineColumn(testBoard)
+        simulateMoveUp(testBoard)
+        if (!arraysEqual(boardOriginal, testBoard)) {
+            dif = true
+        }
+
+        // Test Down
+        testBoard = boardOriginal.slice()
+        simulateMoveDown(testBoard)
+        simulateCombineColumn(testBoard)
+        simulateMoveDown(testBoard)
+        if (!arraysEqual(boardOriginal, testBoard)) {
+            dif = true
+        }
+
+        // If no moves possible, game over
+        if (!dif) {
+            gameOver = true
+            gamePause = true
+            resultDisplay.innerHTML = 'You Lose!'
+        }
+    }
+
+    function arraysEqual(arr1, arr2) {
+        return arr1.every((val, i) => val === arr2[i])
+    }
+
+    function simulateMoveLeft(board) {
+        for (let i = 0; i < width * width; i++) {
+            if (i % width === 0) {
+                let row = [parseInt(board[i]), parseInt(board[i + 1]), parseInt(board[i + 2]), parseInt(board[i + 3])]
+                row.reverse()
+                let filteredRow = row.filter(num => num)
+                let missing = width - filteredRow.length
+                let zeros = Array(missing).fill(0)
+                let newRow = zeros.concat(filteredRow)
+                newRow.reverse()
+                board[i] = newRow[0]
+                board[i + 1] = newRow[1]
+                board[i + 2] = newRow[2]
+                board[i + 3] = newRow[3]
+            }
+        }
+    }
+
+    function simulateMoveRight(board) {
+        for (let i = 0; i < width * width; i++) {
+            if (i % width === 0) {
+                let row = [parseInt(board[i]), parseInt(board[i + 1]), parseInt(board[i + 2]), parseInt(board[i + 3])]
+                let filteredRow = row.filter(num => num)
+                let missing = width - filteredRow.length
+                let zeros = Array(missing).fill(0)
+                let newRow = zeros.concat(filteredRow)
+                board[i] = newRow[0]
+                board[i + 1] = newRow[1]
+                board[i + 2] = newRow[2]
+                board[i + 3] = newRow[3]
+            }
+        }
+    }
+
+    function simulateMoveUp(board) {
+        for (let i = 0; i < width; i++) {
+            let col = [parseInt(board[i]), parseInt(board[i + width]), parseInt(board[i + width * 2]), parseInt(board[i + width * 3])]
+            col.reverse()
+            let filteredCol = col.filter(num => num)
+            let missing = width - filteredCol.length
+            let zeros = Array(missing).fill(0)
+            let newCol = zeros.concat(filteredCol)
+            newCol.reverse()
+            board[i] = newCol[0]
+            board[i + width] = newCol[1]
+            board[i + width * 2] = newCol[2]
+            board[i + width * 3] = newCol[3]
+        }
+    }
+
+    function simulateMoveDown(board) {
+        for (let i = 0; i < width; i++) {
+            let col = [parseInt(board[i]), parseInt(board[i + width]), parseInt(board[i + width * 2]), parseInt(board[i + width * 3])]
+            let filteredCol = col.filter(num => num)
+            let missing = width - filteredCol.length
+            let zeros = Array(missing).fill(0)
+            let newCol = zeros.concat(filteredCol)
+            board[i] = newCol[0]
+            board[i + width] = newCol[1]
+            board[i + width * 2] = newCol[2]
+            board[i + width * 3] = newCol[3]
+        }
+    }
+
+    function simulateCombineRow(board) {
+        for (let i = 0; i < width * width - 1; i++) {
+            if (board[i] === board[i + 1] && board[i] != 0) {
+                board[i] = parseInt(board[i]) * 2
+                board[i + 1] = 0
+            }
+        }
+    }
+
+    function simulateCombineColumn(board) {
+        for (let i = 0; i < width * (width - 1); i++) {
+            if (board[i] === board[i + width] && board[i] != 0) {
+                board[i] = parseInt(board[i]) * 2
+                board[i + width] = 0
+            }
+        }
+    }
+
+    /*    // if board is different any time, !game over
+        let dif = false
+        for (i = 0; i < width * width; i++) {
+            if (boardOriginal[i] != boardLeft[i]) {
+                dif = true
+                console.log(dif)
+                //gameOver = false
+            }
+            if (boardOriginal[i] != boardRight[i]) {
+                dif = true
+                console.log(dif)
+                //gameOver = false
+            }
+            if (boardOriginal[i] != boardUp[i]) {
+                dif = true
+                console.log(dif)
+                //gameOver = false
+            }
+            if (boardOriginal[i] != boardDown[i]) {
+                dif = true
+                console.log(dif)
+                //gameOver = false
+            } else if (dif == false){
+                // else game over
+                console.log(dif)
+                gameOver = true
+                resultDisplay.innerHTML = 'You Lose!'
+            } else {
+                console.log('wtf')
+            }
+        }     */
+
     
+    //checkGameOver()
+    /*if (gameOver == true) {
+        resultDisplay.innerHTML = 'You Lose!'
+    }*/
+
+    function newGame() {
+        console.log("newGame function called")
+        gridDisplay.innerHTML = ''
+        scoreDisplay.innerHTML = '0'
+        resultDisplay.innerHTML = document.getElementById('result').innerHTML
+        tiles = []
+        score = 0
+        gamePause = false
+        gameWon = false
+        gameOver = false
+        createBoard()
+    }
+
+    console.log(gameOver)
 })
