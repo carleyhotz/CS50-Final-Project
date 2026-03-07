@@ -1,9 +1,20 @@
 {% extends "layout.html" %}
 
+{% block link %}
+    <link href="../static/home.css" rel="stylesheet">
+{% endblock %}
+
 {% block title %}Home{% endblock %}
 
 {% block main %}
-    <h2>Home</h2>
-    <p>tesssssssssting</p>
-    <p>Hello, this site will have some web games for users to play. The first game to be released will be 2048.</p>
+    <div class="home-container">
+        <h2>Game Time Games</h2>
+        <hr>
+        <h3>Hello, and welcome to Game Time Games!</h3>
+        <p>This site will have some web games for users to play. The first game to be released will be 2048. Other games will be added in the future, so stay tuned!</p>
+        <p>To play, click on the "2048" link in the navigation bar above. If you want to keep track of your high scores, be sure to register for an account and log in before playing!</p>
+        <br>
+        <p>Other games to be released: Sudoku, Tetris, Minesweeper, Checkers, and more!</p>
+        <p>Have fun and good luck!</p>
+    </div>
 {% endblock %}

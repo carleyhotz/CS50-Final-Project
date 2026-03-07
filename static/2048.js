@@ -254,6 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (currentBoard().some(n => n === 2048)) { // check if any tile has value 2048
             gameWon = true;
+            // change title color and display win message
+            document.getElementsByTagName('h2')[0].style.color = '#3648e8';
             resultDisplay.innerHTML = 'You Win!!!';
             // pause the game until 'continue' or 'new game' buttons are clicked
             gamePause = true;
