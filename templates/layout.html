@@ -18,9 +18,9 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/2048">2048</a></li>
                 {% if session.get("user_id") %}
-                    <li><a href="/logout">Log Out</a></li>
+                    <li id="nav-right"><a href="/logout">Log Out</a></li>
                 {% else %}
-                    <li><a href="/login">Log In</a></li>
+                    <li id="nav-right"><a href="/login">Log In</a></li>
                     <li><a href="/register">Register</a></li>
                 {% endif %}
             </ul>

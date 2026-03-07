@@ -18,6 +18,10 @@ header nav ul li a:hover {
     background-color: #111111;
 }
 
+header nav ul #nav-right {
+    margin-left: auto;
+}
+
 .main {
     margin-bottom: 1em;
     margin-top: 1em;
