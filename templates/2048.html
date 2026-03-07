@@ -18,7 +18,11 @@
             </div>
             <div class="best-container">
                 <p class="best-title">Best</p>
-                <h3 id="best">100000</h3>
+                {% if highscore is not none %}
+                <h3 id="best">{{ highscore }}</h3>
+                {% else %}
+                <h3 id="best">0</h3>
+                {% endif %}
             </div>
         </div>
         <div class="info2">

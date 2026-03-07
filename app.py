@@ -1,3 +1,4 @@
+from flask import jsonify
 from flask import Flask, render_template, request, redirect, session, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from cs50 import SQL
@@ -16,7 +17,37 @@ def index():
 
 @app.route("/2048")
 def G_2048():
-    return render_template("2048.html")
+    highscore = 0
+    if session.get("user_id"):
+        rows = db.execute("SELECT highscore FROM scores WHERE user_id = ? AND game = '2048'", session["user_id"])
+        if rows:
+            highscore = rows[0]["highscore"]
+        else:
+            # If no score exists, insert a row for this user/game
+            db.execute("INSERT INTO scores (user_id, game, highscore) VALUES (?, ?, ?)", session["user_id"], "2048", 0)
+    return render_template("2048.html", highscore=highscore)
+
+
+# Route to update 2048 highscore
+@app.route("/update_2048_highscore", methods=["POST"])
+def update_2048_highscore():
+    if not session.get("user_id"):
+        return jsonify(success=False), 403
+    data = request.get_json()
+    new_score = data.get("score")
+    if new_score is None:
+        return jsonify(success=False), 400
+    # Get current highscore
+    rows = db.execute("SELECT highscore FROM scores WHERE user_id = ? AND game = '2048'", session["user_id"])
+    if rows:
+        if new_score > rows[0]["highscore"]:
+            db.execute("UPDATE scores SET highscore = ? WHERE user_id = ? AND game = '2048'", new_score, session["user_id"])
+            return jsonify(success=True)
+        else:
+            return jsonify(success=True)  # No update needed, but still success
+    else:
+        db.execute("INSERT INTO scores (user_id, game, highscore) VALUES (?, ?, ?)", session["user_id"], "2048", new_score)
+        return jsonify(success=True)
 
 
 @app.route("/login", methods=["GET", "POST"])

@@ -9,6 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let gamePause = false;
     let gameWon = false;
     let gameOver = false;
+    let highscore = parseInt(document.getElementById('best').innerText) || 0; // get initial high score from page
+
+    // check and update highscore if beaten
+    function checkAndUpdateHighscore() {
+        if (score > highscore) {
+            updateHighscore(score);
+            highscore = score;
+            document.getElementById('best').innerText = score;
+        }
+    }
 
 
     /* -- board and tile setup -- */
@@ -135,6 +145,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 tile.style.backgroundColor = '#DADBDC'; // default for empty or unmapped tiles
             }
         });
+    }
+
+    // helper function for updating high score in database and on page
+    function updateHighscore(newScore) {
+        fetch('/update_2048_highscore', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ score: newScore })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('user-highscore').innerText = 'Your 2048 Highscore: ' + newScore;
+                }
+            });
     }
 
 
@@ -295,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             applyBoard(b);
             scoreDisplay.innerHTML = score;
             generate();
+            checkAndUpdateHighscore();
         }
         checkWin();
         checkGameOver();
@@ -310,6 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
             applyBoard(b);
             scoreDisplay.innerHTML = score;
             generate();
+            checkAndUpdateHighscore();
         }
         checkWin();
         checkGameOver();
@@ -325,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
             applyBoard(b);
             scoreDisplay.innerHTML = score;
             generate();
+            checkAndUpdateHighscore();
         }
         checkWin();
         checkGameOver();
@@ -340,6 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
             applyBoard(b);
             scoreDisplay.innerHTML = score;
             generate();
+            checkAndUpdateHighscore();
         }
         checkWin();
         checkGameOver();
