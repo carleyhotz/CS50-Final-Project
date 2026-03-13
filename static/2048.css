@@ -1,5 +1,5 @@
 :root {
-    /* 2048 tile colors */
+    /* 2048 tile colors -- googled how to assign colors to CSS variables */ 
     --grid: #5C5E61;
     --orange: #FFAE5B;
     --yellow: #FFE873;

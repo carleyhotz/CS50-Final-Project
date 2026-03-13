@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameOver = false;
     let highscore = parseInt(document.getElementById('best').innerText) || 0; // get initial high score from page
 
-    // check and update highscore if beaten
+    // Watched tutorials and read documentation for 2048 game logic to aid in creating the game. I used Github Copilot to help me organize my code and write some helper functions, but the core logic of the game was implemented by me.
+    /* -- Github Copilot helped me organize all my functions into sections commented out like this -- */
+
+    // check and update highscore if beaten - Github Copilot helped with this function
     function checkAndUpdateHighscore() {
         if (score > highscore) {
             updateHighscore(score);
@@ -78,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* -- helper functions for board manipulation -- */
+    // Github Copilot helped with these functions to convert between board state and tile values, and to compare board states
     // get current board state
     function currentBoard() {
         return tiles.map(t => parseInt(t.innerHTML)); // convert tile values to array of integers
@@ -98,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* -- helper functions for tile colors -- */
+    // Github Copilot helped me assign colors to tiles based on their values using CSS variables, and to adjust font size for larger numbers
     // add colors to tiles based on their values
     function addColors() {
         // map tile values to CSS variable names
@@ -114,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
             512: '--indigo',
             1024: '--purple',
             2048: '--dkblue',
-            // add more as needed, e.g., 256: '--another-color'
         };
 
         // loop through tiles and set background color based on value
@@ -148,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // helper function for updating high score in database and on page
+    // Github Copilot helped with this function
     function updateHighscore(newScore) {
         fetch('/update_2048_highscore', {
             method: 'POST',
@@ -166,6 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* -- pure logic (no DOM) slide and combine functions -- */
+
+    /* Github Copilot helped update these functions to incorporate the helper functions above. 
+        The helper functions were needed, as I was previously had the logic and DOM manipulation 
+        together in the slide and combine functions, which was causing bugs. */
+
     function slideLeft(array) {
         let newBoard = array.slice();
         for (let row = 0; row < width; row++) {                                         // [0,2,0,4]
@@ -405,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.addEventListener('keyup', arrows);
 
-    // prevent scrolling when using arrow keys during gameplay
+    // prevent arrow key scrolling when using arrow keys during gameplay
     function noscroll(event) {
         if (!gamePause && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) {
             event.preventDefault();

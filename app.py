@@ -28,6 +28,7 @@ def G_2048():
     return render_template("2048.html", highscore=highscore)
 
 
+# Github Copilot helped with this section
 # Route to update 2048 highscore
 @app.route("/update_2048_highscore", methods=["POST"])
 def update_2048_highscore():
