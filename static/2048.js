@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return a.length === b.length && a.every((value, index) => value === b[index]);
     }
 
-    /* -- helper functions for tile colors -- */
+    /* -- helper functions for tile colors and font sizes -- */
     // Github Copilot helped me assign colors to tiles based on their values using CSS variables, and to adjust font size for larger numbers
     // add colors to tiles based on their values
     function addColors() {

@@ -14,7 +14,6 @@
 }
 
 main {
-    /*background-color: #93969A;*/
     display: flex;
     justify-content: center;
     font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
@@ -54,12 +53,10 @@ h3, p {
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    /*width: 70px;*/ /* change to be responsive to numbers inside*/
     height: 60px;
     border-radius: 3px;
     background-color: #707377;
     color: white;
-
 }
 
 #score, #best {
@@ -116,47 +113,7 @@ h3, p {
     font-weight: bold;
     text-align: center;
     font-size: 60px;
-    /* Remove or override line-height if needed */
-    /* line-height: 1.6; */
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-
-
-/* 2048 Grid start */
-/*
-.square {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-
-    width: 75vw;
-    height: 75vh;
-    margin: 0 auto;
-    margin-bottom: 4.5em;
-}
-
-.container {
-    display: inline-grid;
-    grid-template: repeat(4, 1fr)/repeat(4, 1fr);
-    background-color: dodgerblue;
-    padding: 10px;
-    justify-items: center;
-    gap: 10px;
-    min-height: 350px;
-}
-
-.container div {
-    background-color: #f1f1f1;
-    border: 1px solid black;
-    padding: 10px;
-    font-size: 50px;
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-*/
-/* 2048 end */
