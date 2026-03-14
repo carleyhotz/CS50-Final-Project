@@ -1,8 +1,6 @@
 # CS50-Final-Project
-#### Video Demo:  <URL HERE>
+#### Video Demo:  [video URL](https://youtu.be/qJy7xWYjHRA)
 #### Description:
-TODO
-
 In my final project, I created a website for web-based games and created the first game, 2048. I coded this project outside CS50's IDE in a desktop version of Visual Studio Code and used WSL for the command-line. For the project itself, I used HTML, CSS, Java Script, and Flask. This project gave me a much better understanding of just how much goes into a game like this, because even after knowing a bit about coding, I never would have guessed that the game 2048 was so complex under the hood.
 
 Starting with the project directory, there is a static folder, a templates folder, a venv folder, a .gitignore file, app.py, the database (games.db), requirements.txt, and a license. The static folder contains all the CSS files, the JS file for the 2048 game, and the logo image used in the website's header. The templates folder contains all the HTML files like layout.html and all the files that extend it. When setting up the project, I used a virtual environment, venv, to install the Python packages and stored them in requirements.txt. This helped me set up my project and learn about standard practices, so I can learn to do things the right way and avoid issues with package version issues down the line. Originally, my .gitignore file only had /venv to ignore the virtual environment. Then, a folder called "pycache" was auto-generated and I found out what it is and that I should not be tracking it either. I found Github's Python.gitignore and removed the instances of pycache from my repository.
